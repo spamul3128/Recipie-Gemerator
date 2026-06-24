@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🍳 Smart Recipe Generator</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+
+  <!-- ── Header ──────────────────────────────────────────────── -->
+  <header class="site-header">
+    <div class="header-content">
+      <div class="header-icon">🍳</div>
+      <h1>Smart Recipe Generator</h1>
+      <p class="tagline">Drop in your ingredients &mdash; get chef-quality recipes instantly</p>
+    </div>
+  </header>
+
+  <!-- ── Main ────────────────────────────────────────────────── -->
+  <main class="container">
+
+    <!-- Input card -->
+    <section class="card input-card">
+      <h2 class="section-title">What's in your fridge?</h2>
+
+      <!-- Ingredient tag input -->
+      <div class="form-group">
+        <label class="form-label" for="ingredient-input">
+          Ingredients
+          <span class="hint">Type an ingredient and press <kbd>Enter</kbd> or <kbd>,</kbd></span>
+        </label>
+        <div class="tag-container" id="tag-container">
+          <input
+            id="ingredient-input"
+            type="text"
+            class="tag-input"
+            placeholder="e.g. chicken, garlic, lemon…"
+            autocomplete="off"
+            maxlength="50"
+          />
+        </div>
+        <p class="helper-text" id="ingredient-count">0 ingredients added</p>
+      </div>
+
+      <!-- Dietary restrictions -->
+      <div class="form-group">
+        <label class="form-label">Dietary Restrictions <span class="hint">(optional)</span></label>
+        <div class="restriction-grid">
+          <label class="restriction-pill">
+            <input class="dietary-checkbox" type="checkbox" value="vegan" />
+            <span>🌱 Vegan</span>
+          </label>
+          <label class="restriction-pill">
+            <input class="dietary-checkbox" type="checkbox" value="vegetarian" />
+            <span>🥗 Vegetarian</span>
+          </label>
+          <label class="restriction-pill">
+            <input class="dietary-checkbox" type="checkbox" value="gluten-free" />
+            <span>🌾 Gluten-Free</span>
+          </label>
+          <label class="restriction-pill">
+            <input class="dietary-checkbox" type="checkbox" value="nut-free" />
+            <span>🥜 Nut-Free</span>
+          </label>
+          <label class="restriction-pill">
+            <input class="dietary-checkbox" type="checkbox" value="dairy-free" />
+            <span>🥛 Dairy-Free</span>
+          </label>
+          <label class="restriction-pill">
+            <input class="dietary-checkbox" type="checkbox" value="keto" />
+            <span>🥩 Keto</span>
+          </label>
+        </div>
+      </div>
+
+      <button id="generate-btn" class="btn-primary" disabled>
+        <span class="btn-icon">✨</span> Generate Recipes
+      </button>
+    </section>
+
+    <!-- Loading state -->
+    <div id="loading" class="loading-wrap" hidden>
+      <div class="spinner"></div>
+      <p class="loading-text">Crafting your recipes…</p>
+      <p class="loading-sub">Talking to the chef AI — usually under 5 seconds</p>
+    </div>
+
+    <!-- Error state -->
+    <div id="error-box" class="error-box" hidden>
+      <span class="error-icon">⚠️</span>
+      <p id="error-message"></p>
+      <button class="btn-secondary" onclick="dismissError()">Dismiss</button>
+    </div>
+
+    <!-- Results -->
+    <section id="results-section" hidden>
+
+      <div class="results-header">
+        <div>
+          <h2 class="section-title">Your Recipes</h2>
+          <p id="generation-time" class="helper-text"></p>
+        </div>
+        <!-- Unit toggle -->
+        <div class="unit-toggle-wrap">
+          <span class="unit-label" id="unit-label-metric">Metric</span>
+          <label class="toggle-switch">
+            <input type="checkbox" id="unit-toggle" />
+            <span class="toggle-track">
+              <span class="toggle-thumb"></span>
+            </span>
+          </label>
+          <span class="unit-label" id="unit-label-imperial">Imperial</span>
+        </div>
+      </div>
+
+      <div class="recipes-grid" id="recipes-grid"></div>
+
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>Powered by OpenAI &bull; Built with Scala &amp; Akka HTTP</p>
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
+
